@@ -40,13 +40,13 @@ void eraseBrackets(string& str_copy, int& erase_counter, int i) {
 
 string removeBrackets(const string str) {
     string str_copy = str;
-    string fragment; // фрагмент строки внутри []
-    string fragment_count; //число после []
+    string fragment; // fragment of a string inside []
+    string fragment_count; //number after []
     bool isBracketClosed = false;
     bool isBracketOpen = false;
     int erase_counter = 0;
 
-    //Преобразуем формулу с [] в формулу без [], путем добавления в конец фрагмента внутри fragment_count количество раз
+    //Convert the formula with [] to a formula without [] by adding fragment_count times to the end of the fragment
     for (int i = 0; i < str.length(); i++) {
         if (str[i] == '[' || str[i] == ']') {
             if (str[i] == '[')
@@ -71,7 +71,7 @@ string removeBrackets(const string str) {
             if (isBracketOpen && isBracketClosed) break;
         }
     }
-    //добавляем фрагмент в конец строки
+    //adding a fragment to the end of the string
     for (int i = 0; i < stoi(fragment_count) - 1; i++) {
         str_copy += fragment;
     }
@@ -89,7 +89,7 @@ int search(map<string, int>& result, const string str, int first_number) {
     string current_element;
     string current_number;
 
-    //проверяем первый элемент
+    //checking the first element
     !isdigit(str[0]) ? current_element += str[0] : current_number = str[0];
 
     bool isPrevDigit = isdigit(str[0]);
@@ -98,7 +98,7 @@ int search(map<string, int>& result, const string str, int first_number) {
     {
         if (isupper(str[i]))
         {
-            if (current_element == "") { //если 1й элемент цифра
+            if (current_element == "") { //if the first element is a digit
                 first_number = stoi(current_number);
             }
             else addElementToMap(result, current_number, isPrevDigit, current_element);
@@ -119,7 +119,7 @@ int search(map<string, int>& result, const string str, int first_number) {
         }
     }
 
-    //проверяем последний элемент
+    //checking the last element
     addElementToMap(result, current_number, isPrevDigit, current_element);
 
     return first_number;
